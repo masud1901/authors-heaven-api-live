@@ -10,4 +10,4 @@ SECRET_KEY = env(
     default="faiefioefaeoifhaeofeouavyeovheovheifhaoeigyaeoighaeighapeghapeihg3985720hfahwfih@@",
 )
 
-ALLOWED_HOSTS = ["localhost", "0.0.0.0" "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
