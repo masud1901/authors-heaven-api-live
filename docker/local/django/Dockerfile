@@ -1,8 +1,10 @@
-ARG PYTHON_VERSION=3.10.12-slim-bullseye
+ARG PYTHON_VERSION=3.9-slim-bullseye
 
 FROM python:${PYTHON_VERSION} as python
 
 FROM python as python-build-stage
+
+ENV DEBIAN_FRONTEND=noninteractive
 
 ARG BUILD_ENVIRONMENT=local
 
@@ -12,8 +14,8 @@ RUN apt-get update && apt-get install \
 
 COPY ./requirements .
 
-RUN pip wheel --wheel-dir /user/src/app/wheels \
-    -r ${BUILD_ENVIRONMENT}.txt
+RUN pip wheel --wheel-dir /usr/src/app/wheels \
+    -r ${BUILD_ENVIRONMENT}.txt && ls /usr/src/app/wheels
 
 FROM python as python-run-stage
 
@@ -28,7 +30,7 @@ ENV BUILD_ENV ${BUILD_ENVIRONMENT}
 
 WORKDIR ${APP_HOME}
 
-RUN apt-get update && apt-get install --no-install-recommends \
+RUN apt-get update && apt-get install --no-install-recommends -y \
     libpq-dev \
     gettext \
     && apt-get purge -y --auto-remove -o \
