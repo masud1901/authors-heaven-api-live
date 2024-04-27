@@ -19,6 +19,9 @@ makemigrations:
 collectstatic:
 	docker compose -f local.yml run --rm api python3 manage.py collectstatic --no-input --clear
 
+runserver:
+	docker compose -f local.yml run --rm api python3 manage.py runserver
+
 superuser:
 	docker compose -f local.yml run --rm api python3 manage.py createsuperuser
 
