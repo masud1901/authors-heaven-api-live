@@ -12,16 +12,17 @@ APPS_DIR = ROOT_DIR / "core-apps"
 DEBUG = env.bool("DJANGO_DEBUG", False)
 
 
-# Application definition
+# Application definition    "django.contrib.contenttypes",
+
 
 DJANGO_APPS = [
     "django.contrib.auth",
-    "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.admin",
+    "django.contrib.contenttypes",
 ]
 
 
@@ -32,6 +33,7 @@ THIRD_PARTY_APPS = [
     "phonenumber_field",
     "drf_yasg",
     "corsheaders",
+    "djcelery_email",
 ]
 
 LOCAL_APPS = ["core_apps.common", "core_apps.users", "core_apps.profiles"]
@@ -161,6 +163,13 @@ CORS_URLS_REGEX = r"^/api/.*$"
 
 AUTH_USER_MODEL = "users.User"
 
+
+CELERY_BROKER_URL = env("CELERY_BROKER")
+CELERY_RESULT_BACKEND = env("CELERY_BACKEND")
+CELERY_TIMEZONE = "Asia/Dhaka"
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
 
 LOGGING = {
     "version": 1,
